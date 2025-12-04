@@ -55,8 +55,8 @@ if [ -x "fix_system.sh" ]; then
 
   ./fix_system.sh test_env >/dev/null 2>&1
 
-  PERM_TXT=$(stat -f "%Lp" test_env/nested/sample.txt 2>/dev/null || stat -c "%a" test_env/nested/sample.txt)
-  PERM_SH=$(stat -f "%Lp" test_env/nested/sample.sh 2>/dev/null || stat -c "%a" test_env/nested/sample.sh)
+  PERM_TXT=$(stat -c "%a" test_env/nested/sample.txt 2>/dev/null || stat -c "%a" test_env/nested/sample.txt)
+  PERM_SH=$(stat -c "%a" test_env/nested/sample.sh 2>/dev/null || stat -c "%a" test_env/nested/sample.sh)
 
   if [ "$PERM_TXT" = "644" ]; then
     printf "%b[PASS]%b Text files hardened to 644.\n" "$GREEN" "$NC"
